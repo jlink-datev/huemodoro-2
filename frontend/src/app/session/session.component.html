@@ -1,0 +1,18 @@
+<div *ngIf="(session | async)" class="session {{(session | async)?.state}}">
+
+  <div class="asdf">
+    <span>{{(session | async)?.minutesLeft |number:'2.0'}}:{{(session | async)?.secondsLeft|number:'2.0'}}</span>
+  </div>
+
+  <div>
+    <button [disabled]="disableRunButton()" (click)="runSession()" id="run-button">
+      Run
+    </button>
+    <button [disabled]="disableStopButton()" (click)="stopSession()">
+      Stop
+    </button>
+    <button (click)="resetSession()">
+      Reset
+    </button>
+  </div>
+</div>

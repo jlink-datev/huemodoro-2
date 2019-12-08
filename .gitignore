@@ -1,0 +1,20 @@
+# Maven
+target/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+*.uml
+.shelf
+.idea/
+out/
+
+# Misc
+*.log
+
+# System
+.DS_Store
+Thumbs.db
+
+/application.properties

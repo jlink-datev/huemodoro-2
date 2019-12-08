@@ -1,0 +1,17 @@
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# generated frontend sources
+/src/main/resources/public
+
+# dependencies
+/node_modules
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+/typings

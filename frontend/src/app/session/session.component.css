@@ -1,0 +1,27 @@
+div.session {
+  padding: 0.5em;
+  font-size: 5em;
+}
+
+div.session div {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+button {
+  padding: 2px;
+  width: 10em;
+  background-color: lightgrey;
+}
+
+.STOPPED {
+  background-color: yellow;
+}
+
+.RUNNING {
+  background-color: red;
+}
+
+.FINISHED {
+  background-color: green;
+}
