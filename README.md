@@ -45,6 +45,10 @@ hue.lamp=1
 
 ## Build, Test and Run
 
+Run app on Windows:
+1. Start Script `build-app.bat`
+2. Start Script `run-app.bat`
+
 ### Test Backend
 
 ```
