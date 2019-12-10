@@ -26,7 +26,7 @@ public class HueService implements SessionStateObserver {
 		else if (SessionState.FINISHED.equals(newState))
 			hueBridge.lightOn(Colour.GREEN);
 		else if (SessionState.STOPPED.equals(newState))
-			hueBridge.lightOn(Colour.ORANGE);
+			hueBridge.lightOff();
 
 	}
 
