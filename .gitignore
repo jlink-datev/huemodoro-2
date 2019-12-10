@@ -16,5 +16,3 @@ out/
 # System
 .DS_Store
 Thumbs.db
-
-/application.properties

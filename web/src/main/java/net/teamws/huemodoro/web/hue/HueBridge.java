@@ -42,13 +42,7 @@ public class HueBridge {
 		httpHeaders.setAccept(singletonList(MediaType.ALL));
 
 		HttpEntity<String> requestUpdate =
-				new HttpEntity<>("{"
-										 + "\"on\":true, "
-										 + "\"sat\":254, "
-										 + "\"bri\":120, "
-										 + "\"hue\":" + colour.value() + ", "
-										 + "\"effect\":\"none\""
-										 + "}", httpHeaders);
+				new HttpEntity<>(bodyForColour(colour), httpHeaders);
 
 		executePut(url(), requestUpdate);
 	}
