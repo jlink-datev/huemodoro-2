@@ -124,15 +124,22 @@ class HuemodoroSessionTests {
 
 	@Test
 	void stoppedSessionCanBeRun() {
-		session.stop();
+		session.pause();
 		session.run();
 		assertEquals(SessionState.RUNNING, session.getState());
 	}
 
 	@Test
-	void runningSessionCanBeStopped() {
+	void runningSessionCanBePaused() {
 		session.run();
-		session.stop();
+		session.pause();
+		assertEquals(SessionState.PAUSED, session.getState());
+	}
+
+	@Test
+	void runningSessionCanBeReseted() {
+		session.run();
+		session.reset();
 		assertEquals(SessionState.STOPPED, session.getState());
 	}
 
@@ -147,7 +154,7 @@ class HuemodoroSessionTests {
 
 	@Test
 	void advancingTimeWhileStoppedChangedNothing() {
-		session.stop();
+		session.pause();
 		session.advanceTime(Duration.ofMinutes(5));
 		assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
 	}

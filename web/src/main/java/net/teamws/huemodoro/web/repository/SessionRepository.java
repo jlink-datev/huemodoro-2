@@ -9,7 +9,7 @@ public interface SessionRepository {
 
 	HuemodoroSession runSession();
 
-	HuemodoroSession stopSession();
+	HuemodoroSession pauseSession();
 
 	HuemodoroSession resetSession();
 

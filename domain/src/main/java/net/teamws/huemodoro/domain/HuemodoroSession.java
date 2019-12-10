@@ -43,8 +43,8 @@ public class HuemodoroSession {
 		changeState(SessionState.RUNNING);
 	}
 
-	public void stop() {
-		changeState(SessionState.STOPPED);
+	public void pause() {
+		changeState(SessionState.PAUSED);
 	}
 
 	public void addStateObserver(SessionStateObserver stateObserver) {

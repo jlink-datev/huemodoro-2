@@ -38,10 +38,10 @@ class SessionRepositoryTests {
 	}
 
 	@Test
-	void stoppingSession() {
+	void pausingSession() {
 		repository.runSession();
-		HuemodoroSession session = repository.stopSession();
-		assertEquals(STOPPED, session.getState());
+		HuemodoroSession session = repository.pauseSession();
+		assertEquals(PAUSED, session.getState());
 	}
 
 	@Test
