@@ -6,9 +6,9 @@ System requirements:
 
 Downloads:
 
-* [JAR-File](https://jlink-datev.github.io/huemodoro-2/releases/web.jar)
-* [Run-Script Unix/Linux](https://jlink-datev.github.io/huemodoro-2/releases/run-app.sh)
-* [Run-Script Windows](https://jlink-datev.github.io/huemodoro-2/releases/run-app.bat)
+* [JAR-File](https://jlink-datev.github.io/huemodoro-2/downloads/web-1.0-SNAPSHOT.jar)
+* [Run-Script Unix/Linux](https://jlink-datev.github.io/huemodoro-2/downloads/run-app.sh)
+* [Run-Script Windows](https://jlink-datev.github.io/huemodoro-2/downloads/run-app.bat)
 
 Run the app:
 
