@@ -12,8 +12,15 @@ Downloads:
 
 Run the app:
 
+* Setup Hue: Create file `application.properties` in your download folder and use values from [setup hue](http://htmlpreview.github.io/?https://github.com/mklose/hue4junit/blob/master/setup_hue.html)  for it:
+
+```
+hue.host=<replace-with-hue-bridge-ip>
+hue.client=<replace-with-username>
+hue.lamp=1
+```
 * Unix / Linux or Windows
 ```shell script
-> cd <app-root-folder>
-> ./run-app
+> cd <your-download-folder>
+> run-app
 ```
