@@ -20,9 +20,9 @@ class HueServiceTests {
 	}
 
 	@Test
-	void itShouldTurnLightOffOnStateStopped() {
+	void itShouldTurnLightOrangeOnStateRunning() {
 		hueService.stateChanged(null, SessionState.STOPPED);
-		verify(bridge).lightOff();
+		verify(bridge).lightOn(Colour.ORANGE);
 		verifyNoMoreInteractions(bridge);
 	}
 

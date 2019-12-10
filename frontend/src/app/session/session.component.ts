@@ -13,6 +13,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   public readonly session: Observable<Session> = null;
   private sessionId;
+  private autoRepeat = true;
 
   constructor(private backendService: BackendService, private route: ActivatedRoute) {
     this.session = backendService.sessionObservable;
@@ -23,8 +24,17 @@ export class SessionComponent implements OnInit, OnDestroy {
       const sessionId = params.get('sessionId');
       this.sessionId = sessionId;
 
-      this.backendService.pollSession(sessionId);
+      this.backendService.pollSession(sessionId, result => {
+        if (result.timeLeft === 0) {
+          this.restartSession();
+        }
+      });
     });
+  }
+
+  restartSession() {
+    this.backendService.resetSession(this.sessionId);
+    this.backendService.runSession(this.sessionId);
   }
 
   runSession() {

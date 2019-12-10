@@ -1,7 +1,7 @@
 import {Session, SessionState} from '../models/session';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject, interval, Observable, of, Subscription} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {catchError, map, startWith, switchMap, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Injectable, OnDestroy} from '@angular/core';
 
@@ -25,17 +25,17 @@ export class BackendService implements OnDestroy {
   constructor(private http: HttpClient) {
   }
 
-  pollSession(sessionId) {
+  pollSession(sessionId, callback) {
     this.sessionPolling = interval(1000)
       .pipe(
         startWith(0),
-        switchMap(() => this.getSession(sessionId))
+        switchMap(() => this.getSession(sessionId)),
+        tap(result => callback(result)),
       )
       .subscribe(
         session => this.sessionSource.next(session)
       );
   }
-
   cancelPolling() {
     this.sessionPolling.unsubscribe();
   }
