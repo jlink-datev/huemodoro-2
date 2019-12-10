@@ -1,7 +1,8 @@
 export enum SessionState {
   STOPPED = 'STOPPED',
   RUNNING = 'RUNNING',
-  FINISHED = 'FINISHED'
+  FINISHED = 'FINISHED',
+  PAUSED = 'PAUSED',
 }
 
 export class Session {

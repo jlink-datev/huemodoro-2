@@ -14,7 +14,7 @@ button {
   background-color: lightgrey;
 }
 
-.STOPPED {
+.PAUSED {
   background-color: orange;
 }
 
@@ -24,4 +24,8 @@ button {
 
 .FINISHED {
   background-color: green;
+}
+
+.STOPPED {
+  background-color: yellow;
 }
