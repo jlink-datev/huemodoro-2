@@ -1,5 +1,5 @@
 package net.teamws.huemodoro.domain;
 
 public enum SessionState {
-	RUNNING, FINISHED, STOPPED
+	RUNNING, FINISHED, STOPPED, PAUSED
 }

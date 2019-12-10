@@ -30,8 +30,8 @@ public class InMemorySessionRepository implements SessionRepository {
 	}
 
 	@Override
-	public HuemodoroSession stopSession() {
-		session.stop();
+	public HuemodoroSession pauseSession() {
+		session.pause();
 		return session;
 	}
 

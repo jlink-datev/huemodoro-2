@@ -72,22 +72,22 @@ class SessionControllerTests {
 	@Test
 	void stopSession() throws Exception {
 		HuemodoroSession session = new HuemodoroSession();
-		session.stop();
+		session.pause();
 
-		when(sessionRepository.stopSession()).thenReturn(session);
+		when(sessionRepository.pauseSession()).thenReturn(session);
 
 		MvcResult result = mockMvc.perform(put(SESSIONS_PATH + "{id}/stop", "1"))
 								  .andExpect(status().isOk())
 								  .andReturn();
 
 		Map jsonResponse = responseAsMap(result);
-		assertEquals(STOPPED.name(), jsonResponse.get("state"));
+		assertEquals(PAUSED.name(), jsonResponse.get("state"));
 	}
 
 	@Test
 	void resetSession() throws Exception {
 		HuemodoroSession session = new HuemodoroSession();
-		session.stop();
+		session.reset();
 
 		when(sessionRepository.resetSession()).thenReturn(session);
 
