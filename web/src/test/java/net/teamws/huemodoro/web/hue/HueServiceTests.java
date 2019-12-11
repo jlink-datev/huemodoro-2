@@ -21,7 +21,7 @@ class HueServiceTests {
 
 	@Test
 	void itShouldTurnLightOffOnStateStopped() {
-		hueService.stateChanged(null, SessionState.STOPPED);
+		hueService.stateChanged(null, SessionState.INITIAL);
 		verify(bridge).lightOff();
 		verifyNoMoreInteractions(bridge);
 	}
@@ -35,7 +35,7 @@ class HueServiceTests {
 
 	@Test
 	void itShouldTurnLightGreenOnStateFinished() {
-		hueService.stateChanged(null, SessionState.FINISHED);
+		hueService.stateChanged(null, SessionState.BREAK);
 		verify(bridge).lightOn(Colour.GREEN);
 		verifyNoMoreInteractions(bridge);
 	}

@@ -5,7 +5,7 @@ import java.util.*;
 
 public class HuemodoroSession {
 
-	private static final SessionState INITIAL_STATE = SessionState.STOPPED;
+	private static final SessionState INITIAL_STATE = SessionState.INITIAL;
 	private static final Duration DEFAULT_DURATION = Duration.ofMinutes(25);
 
 	private Duration timeLeft = DEFAULT_DURATION;
@@ -24,7 +24,7 @@ public class HuemodoroSession {
 				timeLeft = Duration.ZERO;
 			}
 			if (timeLeft.isZero()) {
-				SessionState finished = SessionState.FINISHED;
+				SessionState finished = SessionState.BREAK;
 				changeState(finished);
 			}
 		}

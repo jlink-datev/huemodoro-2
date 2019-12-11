@@ -55,7 +55,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   disableRunButton(): boolean {
     let isDisabled = false;
-    this.session.subscribe(session => isDisabled = session.state !== SessionState.STOPPED);
+    this.session.subscribe(session => isDisabled = session.state !== SessionState.INITIAL);
     return isDisabled;
   }
 

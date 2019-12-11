@@ -16,7 +16,7 @@ function mapToSession(json: any): Session {
 export class BackendService implements OnDestroy {
 
   private readonly sessionSource: BehaviorSubject<Session> = new BehaviorSubject<Session>(
-    new Session('0', SessionState.STOPPED, 25000)
+    new Session('0', SessionState.INITIAL, 25000)
   );
   readonly sessionObservable: Observable<Session> = this.sessionSource.asObservable();
   private sessionPolling: Subscription;

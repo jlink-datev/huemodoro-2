@@ -21,7 +21,7 @@ class SessionRepositoryTests {
 	@Test
 	void initiallySessionIsFresh() {
 		HuemodoroSession session = repository.getSession();
-		assertEquals(STOPPED, session.getState());
+		assertEquals(INITIAL, session.getState());
 		assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
 	}
 
@@ -34,7 +34,7 @@ class SessionRepositoryTests {
 	@Test
 	void hueServiceIsRegisteredAsStateChangeObserver() {
 		repository.runSession();
-		verify(hueService).stateChanged(STOPPED, RUNNING);
+		verify(hueService).stateChanged(INITIAL, RUNNING);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ class SessionRepositoryTests {
 		repository.advanceTime(Duration.ofMinutes(12));
 
 		HuemodoroSession session = repository.resetSession();
-		assertEquals(STOPPED, session.getState());
+		assertEquals(INITIAL, session.getState());
 		assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
 	}
 
@@ -60,7 +60,7 @@ class SessionRepositoryTests {
 		repository.advanceTime(Duration.ofHours(1));
 
 		HuemodoroSession session = repository.getSession();
-		assertEquals(SessionState.FINISHED, session.getState());
+		assertEquals(SessionState.BREAK, session.getState());
 		assertEquals(Duration.ZERO, session.getTimeLeft());
 	}
 }

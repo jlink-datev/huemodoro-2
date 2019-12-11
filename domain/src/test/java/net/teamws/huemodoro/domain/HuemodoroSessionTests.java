@@ -20,7 +20,7 @@ class HuemodoroSessionTests {
 
 		@Test
 		void isInStoppedState() {
-			assertEquals(SessionState.STOPPED, session.getState());
+			assertEquals(SessionState.INITIAL, session.getState());
 		}
 
 		@Test
@@ -40,7 +40,7 @@ class HuemodoroSessionTests {
 
 		@Test
 		void isFinished() {
-			assertEquals(SessionState.FINISHED, session.getState());
+			assertEquals(SessionState.BREAK, session.getState());
 		}
 
 		@Test
@@ -52,7 +52,7 @@ class HuemodoroSessionTests {
 		@Test
 		void canBeReset() {
 			session.reset();
-			assertEquals(SessionState.STOPPED, session.getState());
+			assertEquals(SessionState.INITIAL, session.getState());
 			assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
 		}
 	}
@@ -77,7 +77,7 @@ class HuemodoroSessionTests {
 		@Test
 		void fromStoppedToRunning() {
 			session.run();
-			assertEquals(SessionState.STOPPED, oldState);
+			assertEquals(SessionState.INITIAL, oldState);
 			assertEquals(SessionState.RUNNING, newState);
 		}
 
@@ -86,7 +86,7 @@ class HuemodoroSessionTests {
 			session.run();
 			session.advanceTime(Duration.ofHours(1));
 			assertEquals(SessionState.RUNNING, oldState);
-			assertEquals(SessionState.FINISHED, newState);
+			assertEquals(SessionState.BREAK, newState);
 		}
 
 		@Test
@@ -94,7 +94,7 @@ class HuemodoroSessionTests {
 			session.run();
 			session.reset();
 			assertEquals(SessionState.RUNNING, oldState);
-			assertEquals(SessionState.STOPPED, newState);
+			assertEquals(SessionState.INITIAL, newState);
 		}
 
 		@Test
@@ -106,9 +106,9 @@ class HuemodoroSessionTests {
 			};
 			session.addStateObserver(second);
 			session.run();
-			assertEquals(SessionState.STOPPED, oldState);
+			assertEquals(SessionState.INITIAL, oldState);
 			assertEquals(SessionState.RUNNING, newState);
-			assertEquals(SessionState.STOPPED, oldState);
+			assertEquals(SessionState.INITIAL, oldState);
 			assertEquals(SessionState.RUNNING, newState);
 		}
 
@@ -140,7 +140,7 @@ class HuemodoroSessionTests {
 	void runningSessionCanBeReseted() {
 		session.run();
 		session.reset();
-		assertEquals(SessionState.STOPPED, session.getState());
+		assertEquals(SessionState.INITIAL, session.getState());
 	}
 
 	@Test
@@ -168,7 +168,7 @@ class HuemodoroSessionTests {
 		session.advanceTime(Duration.ofMinutes(6));
 		session.advanceTime(Duration.ofMinutes(6));
 		assertEquals(Duration.ZERO, session.getTimeLeft());
-		assertEquals(SessionState.FINISHED, session.getState());
+		assertEquals(SessionState.BREAK, session.getState());
 	}
 
 }

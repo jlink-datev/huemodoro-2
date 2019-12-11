@@ -49,7 +49,7 @@ class SessionControllerTests {
 								  .andReturn();
 
 		Map jsonResponse = responseAsMap(result);
-		assertEquals(STOPPED.name(), jsonResponse.get("state"));
+		assertEquals(INITIAL.name(), jsonResponse.get("state"));
 		assertEquals("1", jsonResponse.get("id"));
 		assertEquals(1500.0, jsonResponse.get("timeLeft"));
 	}
@@ -96,7 +96,7 @@ class SessionControllerTests {
 								  .andReturn();
 
 		Map jsonResponse = responseAsMap(result);
-		assertEquals(STOPPED.name(), jsonResponse.get("state"));
+		assertEquals(INITIAL.name(), jsonResponse.get("state"));
 	}
 
 	private Map responseAsMap(MvcResult result) throws Exception {

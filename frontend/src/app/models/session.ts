@@ -1,5 +1,5 @@
 export enum SessionState {
-  STOPPED = 'STOPPED',
+  INITIAL = 'INITIAL',
   RUNNING = 'RUNNING',
   FINISHED = 'FINISHED',
   PAUSED = 'PAUSED',
