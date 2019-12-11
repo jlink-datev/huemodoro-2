@@ -46,4 +46,11 @@ class HueServiceTests {
 		verify(bridge).lightOn(Colour.ORANGE);
 		verifyNoMoreInteractions(bridge);
 	}
+
+	@Test
+	void itShouldTurnLightOffOnStateFinished() {
+		hueService.stateChanged(null, SessionState.FINISHED);
+		verify(bridge).lightOff();
+		verifyNoMoreInteractions(bridge);
+	}
 }
