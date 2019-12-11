@@ -29,3 +29,6 @@ button {
 .STOPPED {
   background-color: yellow;
 }
+.BREAK {
+  background-color: green;
+}

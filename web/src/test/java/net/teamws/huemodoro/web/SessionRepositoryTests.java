@@ -55,12 +55,23 @@ class SessionRepositoryTests {
 	}
 
 	@Test
-	void advanceTimeAdvancesTimeOfSession() {
+	void breakStartsAfterPomodoroAndTimeLeftIsFiveMinutes() {
 		repository.runSession();
 		repository.advanceTime(Duration.ofHours(1));
 
 		HuemodoroSession session = repository.getSession();
 		assertEquals(SessionState.BREAK, session.getState());
+		assertEquals(Duration.ofMinutes(5), session.getTimeLeft());
+	}
+
+	@Test
+	void whenBreakIsOverStateIsFinished() {
+		repository.runSession();
+		repository.advanceTime(Duration.ofHours(1));
+		repository.advanceTime(Duration.ofHours(1));
+
+		HuemodoroSession session = repository.getSession();
+		assertEquals(FINISHED, session.getState());
 		assertEquals(Duration.ZERO, session.getTimeLeft());
 	}
 }

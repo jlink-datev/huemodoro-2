@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HuemodoroSessionTests {
 
+	public static final int POMODORO_SESSION_RUN_TIME = 25;
+	public static final int POMODORO_SESSION_BREAK_TIME = 5;
 	HuemodoroSession session;
 
 	@BeforeEach
@@ -25,27 +27,28 @@ class HuemodoroSessionTests {
 
 		@Test
 		void timeLeftIs25Minutes() {
-			assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
+			assertEquals(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME), session.getTimeLeft());
 		}
 
 	}
 
 	@Nested
-	class FinishedSession {
+	class BreakSession {
 		@BeforeEach
-		void finishSession() {
+		void breakSession() {
 			session.run();
-			session.advanceTime(Duration.ofMinutes(25));
+			session.advanceTime(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME));
 		}
 
 		@Test
-		void isFinished() {
+		void isInBreakState() {
 			assertEquals(SessionState.BREAK, session.getState());
 		}
 
 		@Test
-		void timeCanNoLongerAdvance() {
-			session.advanceTime(Duration.ofMinutes(1));
+		void isFinishedAfter5Minutes() {
+			session.advanceTime(Duration.ofMinutes(POMODORO_SESSION_BREAK_TIME));
+			assertEquals(SessionState.FINISHED, session.getState());
 			assertEquals(Duration.ZERO, session.getTimeLeft());
 		}
 
@@ -53,7 +56,7 @@ class HuemodoroSessionTests {
 		void canBeReset() {
 			session.reset();
 			assertEquals(SessionState.INITIAL, session.getState());
-			assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
+			assertEquals(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME), session.getTimeLeft());
 		}
 	}
 
@@ -156,18 +159,14 @@ class HuemodoroSessionTests {
 	void advancingTimeWhileStoppedChangedNothing() {
 		session.pause();
 		session.advanceTime(Duration.ofMinutes(5));
-		assertEquals(Duration.ofMinutes(25), session.getTimeLeft());
+		assertEquals(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME), session.getTimeLeft());
 	}
 
 	@Test
-	void advancingTimeBeyondZeroSetsSessionToFinished() {
+	void advancingTimeBeyondZeroSetsSessionToBreak() {
 		session.run();
-		session.advanceTime(Duration.ofMinutes(6));
-		session.advanceTime(Duration.ofMinutes(6));
-		session.advanceTime(Duration.ofMinutes(6));
-		session.advanceTime(Duration.ofMinutes(6));
-		session.advanceTime(Duration.ofMinutes(6));
-		assertEquals(Duration.ZERO, session.getTimeLeft());
+		session.advanceTime(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME + 1));
+		assertEquals(Duration.ofMinutes(POMODORO_SESSION_BREAK_TIME), session.getTimeLeft());
 		assertEquals(SessionState.BREAK, session.getState());
 	}
 

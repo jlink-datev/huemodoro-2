@@ -18,14 +18,19 @@ public class HuemodoroSession {
 	}
 
 	public void advanceTime(Duration advanceBy) {
-		if (state == SessionState.RUNNING) {
+		if (state == SessionState.RUNNING || state == SessionState.BREAK) {
 			timeLeft = timeLeft.minus(advanceBy);
 			if (timeLeft.isNegative()) {
 				timeLeft = Duration.ZERO;
 			}
 			if (timeLeft.isZero()) {
-				SessionState finished = SessionState.BREAK;
-				changeState(finished);
+				if(state == SessionState.RUNNING) {
+					timeLeft = Duration.ofMinutes(5);
+					changeState(SessionState.BREAK);
+				} else {
+					SessionState finished = SessionState.FINISHED;
+					changeState(finished);
+				}
 			}
 		}
 	}
