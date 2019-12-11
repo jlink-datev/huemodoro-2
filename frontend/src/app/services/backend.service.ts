@@ -53,8 +53,8 @@ export class BackendService implements OnDestroy {
       .subscribe(this.doNothingButTriggerSubscription);
   }
 
-  stopSession(sessionId: string): void {
-    const url = `${environment.backendBaseUrl}/sessions/${sessionId}/stop`;
+  pauseSession(sessionId: string): void {
+    const url = `${environment.backendBaseUrl}/sessions/${sessionId}/pause`;
     this.http.put<Session>(url, null)
       .pipe(catchError(this.handleError), map(mapToSession))
       .subscribe(this.doNothingButTriggerSubscription);

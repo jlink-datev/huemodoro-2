@@ -34,8 +34,8 @@ public class SessionController {
 		return new SessionResponse(session);
 	}
 
-	@RequestMapping(path = "{id}/stop", method = RequestMethod.PUT)
-	public SessionResponse stopSession(@PathVariable String id) {
+	@RequestMapping(path = "{id}/pause", method = RequestMethod.PUT)
+	public SessionResponse pauseSession(@PathVariable String id) {
 		ensureIdIs1(id);
 		HuemodoroSession session = repository.pauseSession();
 		return new SessionResponse(session);

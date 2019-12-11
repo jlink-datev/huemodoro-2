@@ -76,7 +76,7 @@ class SessionControllerTests {
 
 		when(sessionRepository.pauseSession()).thenReturn(session);
 
-		MvcResult result = mockMvc.perform(put(SESSIONS_PATH + "{id}/stop", "1"))
+		MvcResult result = mockMvc.perform(put(SESSIONS_PATH + "{id}/pause", "1"))
 								  .andExpect(status().isOk())
 								  .andReturn();
 

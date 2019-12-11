@@ -41,8 +41,8 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.backendService.runSession(this.sessionId);
   }
 
-  stopSession() {
-    this.backendService.stopSession(this.sessionId);
+  pauseSession() {
+    this.backendService.pauseSession(this.sessionId);
   }
 
   resetSession() {
