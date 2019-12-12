@@ -6,20 +6,34 @@ import java.util.*;
 public class HuemodoroSession {
 
 	private static final SessionState INITIAL_STATE = SessionState.INITIAL;
-	private static final Duration DEFAULT_DURATION = Duration.ofMinutes(25);
+	private static final int DEFAULT_SESSION_LENGTH = 25;
 
-	private Duration timeLeft = DEFAULT_DURATION;
+	private Duration sessionDuration;
+	private Duration timeLeft;
 	private SessionState state = INITIAL_STATE;
 
 	private final List<SessionStateObserver> stateObservers = new ArrayList<>();
 
+	public HuemodoroSession(long sessionTimeInMinutes) {
+		if (sessionTimeInMinutes <= 0) {
+			sessionTimeInMinutes = DEFAULT_SESSION_LENGTH;
+		}
+		sessionDuration = Duration.ofMinutes(sessionTimeInMinutes);
+		timeLeft = sessionDuration;
+	}
+
+	public HuemodoroSession() {
+		this(DEFAULT_SESSION_LENGTH);
+	}
+
 	public Duration getTimeLeft() {
 		return timeLeft;
 	}
-	public boolean autoRestart = true;
+
+	boolean autoRestart = true;
 
 	public void advanceTime(Duration advanceBy) {
-		if(isFinished() && autoRestart) {
+		if (isFinished() && autoRestart) {
 			restart();
 		}
 
@@ -30,7 +44,7 @@ public class HuemodoroSession {
 				timeLeft = Duration.ZERO;
 			}
 			if (timeLeft.isZero()) {
-				if(state == SessionState.RUNNING) {
+				if (state == SessionState.RUNNING) {
 					timeLeft = Duration.ofMinutes(5);
 					changeState(SessionState.BREAK);
 				} else {
@@ -45,14 +59,14 @@ public class HuemodoroSession {
 		return state == SessionState.FINISHED;
 	}
 
-	public void restart() {
-		timeLeft = DEFAULT_DURATION;
+	private void restart() {
+		timeLeft = sessionDuration;
 		changeState(SessionState.RUNNING);
 	}
 
 	public void reset() {
 		changeState(INITIAL_STATE);
-		timeLeft = DEFAULT_DURATION;
+		timeLeft = sessionDuration;
 	}
 
 	public SessionState getState() {

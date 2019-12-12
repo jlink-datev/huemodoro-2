@@ -17,8 +17,10 @@ Run the app:
 ```
 hue.host=<replace-with-hue-bridge-ip>
 hue.client=<replace-with-username>
-hue.lamp=1
+hue.lamp=2
+session.timeInMinutes=<insert session duration here>
 ```
+
 * Unix / Linux or Windows
 ```shell script
 > cd <your-download-folder>

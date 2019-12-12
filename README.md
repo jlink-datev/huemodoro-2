@@ -32,7 +32,7 @@
     npm install
     ```
 
-### Hue
+### Properties file
 
 
 Create file `application.properties` in your project root and use values from [setup hue](http://htmlpreview.github.io/?https://github.com/mklose/hue4junit/blob/master/setup_hue.html)  for it:
@@ -41,6 +41,7 @@ Create file `application.properties` in your project root and use values from [s
 hue.host=<replace-with-hue-bridge-ip>
 hue.client=<replace-with-username>
 hue.lamp=1
+session.timeInMinutes=<insert session duration here>
 ```
 
 ## Build, Test and Run
