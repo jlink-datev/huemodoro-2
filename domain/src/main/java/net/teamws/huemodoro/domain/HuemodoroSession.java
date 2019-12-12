@@ -16,10 +16,16 @@ public class HuemodoroSession {
 	public Duration getTimeLeft() {
 		return timeLeft;
 	}
+	public boolean autoRestart = true;
 
 	public void advanceTime(Duration advanceBy) {
+		if(isFinished() && autoRestart) {
+			restart();
+		}
+
 		if (state == SessionState.RUNNING || state == SessionState.BREAK) {
 			timeLeft = timeLeft.minus(advanceBy);
+
 			if (timeLeft.isNegative()) {
 				timeLeft = Duration.ZERO;
 			}
@@ -33,6 +39,15 @@ public class HuemodoroSession {
 				}
 			}
 		}
+	}
+
+	private boolean isFinished() {
+		return state == SessionState.FINISHED;
+	}
+
+	public void restart() {
+		timeLeft = DEFAULT_DURATION;
+		changeState(SessionState.RUNNING);
 	}
 
 	public void reset() {

@@ -33,6 +33,23 @@ class HuemodoroSessionTests {
 	}
 
 	@Nested
+	class RestartSession {
+		@Test
+		void isRestartedWhenFinishedAndRestartEnabled() {
+			session.autoRestart = true;
+			session.run();
+			session.advanceTime(Duration.ofMinutes(POMODORO_SESSION_RUN_TIME));
+
+			assertEquals(SessionState.BREAK, session.getState());
+
+			session.advanceTime(Duration.ofMinutes(POMODORO_SESSION_BREAK_TIME));
+			session.advanceTime(Duration.ofSeconds(1));
+
+			assertEquals(SessionState.RUNNING, session.getState());
+		}
+	}
+
+	@Nested
 	class BreakSession {
 		@BeforeEach
 		void breakSession() {
